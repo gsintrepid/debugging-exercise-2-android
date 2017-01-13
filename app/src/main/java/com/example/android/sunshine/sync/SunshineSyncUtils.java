@@ -21,7 +21,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.example.android.sunshine.MainActivity;
 import com.example.android.sunshine.data.WeatherContract;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.Driver;
@@ -34,6 +36,8 @@ import com.firebase.jobdispatcher.Trigger;
 import java.util.concurrent.TimeUnit;
 
 public class SunshineSyncUtils {
+
+    private static final String TAG = SunshineSyncUtils.class.getSimpleName();
 
     /*
      * Interval at which to sync with the weather.
@@ -71,7 +75,7 @@ public class SunshineSyncUtils {
                 /*
                  * We want Sunshine's weather data to stay up to date, so we tell this Job to recur.
                  */
-                .setRecurring(true)
+                .setRecurring(false)
                 /*
                  * setLifetime sets how long this job should persist. The options are to keep the
                  * Job "forever" or to have it die the next time the device boots up.
@@ -89,6 +93,8 @@ public class SunshineSyncUtils {
                 .build();
 
         /* Schedule the Job with the dispatcher */
+        Log.v(TAG, "Scheduled job to sync weather." +
+                "Option recurring used to be true, but now it is false and happens only once.");
         dispatcher.schedule(syncSunshineJob);
     }
     /**
@@ -112,6 +118,7 @@ public class SunshineSyncUtils {
          * This method call triggers Sunshine to create its task to synchronize weather data
          * periodically.
          */
+        Log.v(TAG, "Initialize " + TAG);
         scheduleFirebaseJobDispatcherSync(context);
 
         /*
@@ -178,6 +185,7 @@ public class SunshineSyncUtils {
      * @param context The Context used to start the IntentService for the sync.
      */
     public static void startImmediateSync(@NonNull final Context context) {
+        Log.v(TAG, "Create intent to sync weather immediately.");
         Intent intentToSyncImmediately = new Intent(context, SunshineSyncIntentService.class);
         context.startService(intentToSyncImmediately);
     }

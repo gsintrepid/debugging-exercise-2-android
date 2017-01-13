@@ -17,6 +17,7 @@ package com.example.android.sunshine.sync;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.JobParameters;
@@ -25,6 +26,8 @@ import com.firebase.jobdispatcher.RetryStrategy;
 
 
 public class SunshineFirebaseJobService extends JobService {
+
+    public static final String TAG = SunshineFirebaseJobService.class.getSimpleName();
 
     private AsyncTask<Void, Void, Void> mFetchWeatherTask;
 
@@ -45,6 +48,7 @@ public class SunshineFirebaseJobService extends JobService {
             @Override
             protected Void doInBackground(Void... voids) {
                 Context context = getApplicationContext();
+                Log.v(TAG, "Background task to sync weather.");
                 SunshineSyncTask.syncWeather(context);
                 jobFinished(jobParameters, false);
                 return null;
