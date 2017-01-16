@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements
          */
         getSupportLoaderManager().initLoader(ID_FORECAST_LOADER, null, this);
 
-        Log.v(TAG, "MainActivity.oncreate() is where SunshineSyncUtils.startImmediateSync() used to be called.");
+        Log.d(TAG, "MainActivity.oncreate() is where SunshineSyncUtils.startImmediateSync() used to be called.");
         SunshineSyncUtils.initialize(this);
     }
 

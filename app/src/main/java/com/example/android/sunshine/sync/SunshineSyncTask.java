@@ -51,11 +51,9 @@ public class SunshineSyncTask {
              * longitude or off of a simple location as a String.
              */
             URL weatherRequestUrl = NetworkUtils.getUrl(context);
-            Log.v(TAG, "URL: " + weatherRequestUrl.toString());
 
             /* Use the URL to retrieve the JSON */
             String jsonWeatherResponse = NetworkUtils.getResponseFromHttpUrl(weatherRequestUrl);
-            Log.v(TAG, "Response" + jsonWeatherResponse);
 
             /* Parse the JSON into a list of weather values */
             ContentValues[] weatherValues = OpenWeatherJsonUtils

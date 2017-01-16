@@ -182,6 +182,8 @@ public final class NetworkUtils {
                 response = scanner.next();
             }
             scanner.close();
+
+            Log.v(TAG, "Response: " + response);
             return response;
         } finally {
             urlConnection.disconnect();
