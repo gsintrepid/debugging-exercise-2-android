@@ -183,7 +183,7 @@ public final class NetworkUtils {
             }
             scanner.close();
 
-            Log.v(TAG, "Response: " + response);
+            Log.d(TAG, "Response: " + response);
             return response;
         } finally {
             urlConnection.disconnect();
